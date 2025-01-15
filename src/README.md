@@ -47,7 +47,7 @@ Check the README.md in the subject folder for questions specific to a subject.
 
 For internal folks, please ask in the Docs Engineering Slack or repository.
 
-For open source folks, please ask on the [discussion board](https://github.com/github/docs/discussions).
+For open source folks, please open an issue in the repository.
 
 ## A note on tests and required checks
 
@@ -60,3 +60,5 @@ it's important to point out two things:
 1. When you add an entry to `.github/workflows/test.yml`, and it's
    gone into `main`, don't forget to add it to the branch protection's
    required checks.
+
+❖

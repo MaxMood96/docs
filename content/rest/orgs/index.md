@@ -1,5 +1,6 @@
 ---
-title: Organizations
+title: REST API endpoints for organizations
+shortTitle: Organizations
 intro: >-
   Use the REST API to control and manage all your {% data
   variables.product.product_name %} organizations.
@@ -10,12 +11,13 @@ redirect_from:
 versions:
   fpt: '*'
   ghes: '*'
-  ghae: '*'
   ghec: '*'
 topics:
   - API
 children:
+  - /api-insights
   - /blocking
+  - /bypass-requests
   - /custom-properties
   - /custom-roles
   - /members

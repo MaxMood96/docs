@@ -20,11 +20,8 @@ In this section, we're going to focus on the basics of authentication. Specifica
 we're going to create a Ruby server (using [Sinatra](http://www.sinatrarb.com/)) that implements
 the [web flow](/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps) of an application in several different ways.
 
-{% tip %}
-
-You can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/).
-
-{% endtip %}
+> [!TIP]
+> You can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/).
 
 ## Registering your app
 
@@ -87,7 +84,7 @@ Next, in _views/index.erb_, paste this content:
 </html>
 ```
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide](https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application).)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide](https://github.com/sinatra/sinatra-book/blob/main/book/Introduction.markdown#hello-world-application).)
 
 Also, notice that the URL uses the `scope` query parameter to define the
 [scopes](/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps) requested by the application. For our application, we're
@@ -132,7 +129,7 @@ application, you should probably use [a library written in the language of your 
 
 ### Checking granted scopes
 
-Users can edit the scopes you requested by directly changing the URL. This can grant your application less access than you originally asked for. Before making any requests with the token, check the scopes that were granted for the token by the user. For more information about requested and granted scopes, see "[AUTOTITLE](/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#requested-scopes-and-granted-scopes)."
+Users can edit the scopes you requested by directly changing the URL. This can grant your application less access than you originally asked for. Before making any requests with the token, check the scopes that were granted for the token by the user. For more information about requested and granted scopes, see [AUTOTITLE](/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps#requested-scopes-and-granted-scopes).
 
 The scopes that were granted are returned as a part of the response from
 exchanging a token.
@@ -170,8 +167,8 @@ or `401` status, or return a different subset of information.
 To help you gracefully handle these situations, all API responses for requests
 made with valid OAuth app tokens also contain an [`X-OAuth-Scopes` header](/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps).
 This header contains the list of scopes of the token that was used to make the
-request. In addition to that, the REST API provides an endpoint to {% ifversion fpt or ghes or ghec %}
-[check a token for validity](/rest/apps#check-a-token){% else %}[check a token for validity](/rest/apps#check-an-authorization){% endif %}.
+request. In addition to that, the REST API provides an endpoint to
+[check a token for validity](/rest/apps/oauth-applications#check-a-token).
 Use this information to detect changes in token scopes, and inform your users of
 changes in available application functionality.
 
@@ -182,13 +179,13 @@ the logged in user:
 
 ``` ruby
 # fetch user information
-auth_result = JSON.parse(RestClient.get('{% data variables.product.api_url_code %}/user',
+auth_result = JSON.parse(RestClient.get('{% data variables.product.rest_url %}/user',
                                         {:params => {:access_token => access_token}}))
 
 # if the user authorized it, fetch private emails
 if has_user_email_scope
   auth_result['private_emails'] =
-    JSON.parse(RestClient.get('{% data variables.product.api_url_code %}/user/emails',
+    JSON.parse(RestClient.get('{% data variables.product.rest_url %}/user/emails',
                               {:params => {:access_token => access_token}}))
 end
 
@@ -271,7 +268,7 @@ get '/' do
     scopes = []
 
     begin
-      auth_result = RestClient.get('{% data variables.product.api_url_code %}/user',
+      auth_result = RestClient.get('{% data variables.product.rest_url %}/user',
                                    {:params => {:access_token => access_token},
                                     :accept => :json})
     rescue => e
@@ -292,7 +289,7 @@ get '/' do
 
     if scopes.include? 'user:email'
       auth_result['private_emails'] =
-        JSON.parse(RestClient.get('{% data variables.product.api_url_code %}/user/emails',
+        JSON.parse(RestClient.get('{% data variables.product.rest_url %}/user/emails',
                        {:params => {:access_token => access_token},
                         :accept => :json}))
     end

@@ -19,17 +19,17 @@ topics:
 ---
 Push log entries show:
 
-- Who initiated the push
-- Whether it was a force push or not
-- The branch someone pushed to
-- The protocol used to push
-- The originating IP address
-- The Git client used to push
-- The SHA hashes from before and after the operation
+* Who initiated the push
+* Whether it was a force push or not
+* The branch someone pushed to
+* The protocol used to push
+* The originating IP address
+* The Git client used to push
+* The SHA hashes from before and after the operation
 
 {% ifversion repository-activity-view %}
 {% data reusables.repositories.activity-view %}
-For more information, see "[AUTOTITLE](/repositories/viewing-activity-and-data-for-your-repository/using-the-activity-view-to-see-changes-to-a-repository)."
+For more information, see [AUTOTITLE](/repositories/viewing-activity-and-data-for-your-repository/using-the-activity-view-to-see-changes-to-a-repository).
 {% endif %}
 
 ## Viewing a repository's push logs

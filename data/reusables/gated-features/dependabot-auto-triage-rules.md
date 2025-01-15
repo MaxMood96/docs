@@ -1,7 +1,5 @@
-{%- ifversion fpt or ghec %}
-{% data variables.dependabot.custom_rules_caps %} for {% data variables.product.prodname_dependabot_alerts %} are available on any public repositories (for free), and on any private repositories, when you have a license for {% data variables.product.prodname_GH_advanced_security %}.
+{% data variables.dependabot.auto_triage_rules %} are available for the following repository types:
 
-{%- elsif ghes %}
-{% data variables.dependabot.custom_rules_caps %} for {% data variables.product.prodname_dependabot_alerts %} are available for all repositories in {% data variables.product.product_name %}. This feature requires a license for {% data variables.product.prodname_GH_advanced_security %}.
-
-{% endif %}
+* All repositories for {% data variables.dependabot.github_presets %}{% ifversion fpt %}
+* Public repositories for {% data variables.dependabot.custom_rules %}{% elsif ghec or ghes %}
+* Organization-owned repositories with [{% data variables.product.prodname_GH_advanced_security %}](/get-started/learning-about-github/about-github-advanced-security) enabled for {% data variables.dependabot.custom_rules %}{% endif %}

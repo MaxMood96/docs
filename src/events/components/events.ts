@@ -2,6 +2,8 @@
 import Cookies from 'src/frame/components/lib/cookies'
 import { parseUserAgent } from './user-agent'
 import { Router } from 'next/router'
+import { isLoggedIn } from 'src/frame/components/hooks/useHasAccount'
+import { EventType, EventPropsByType } from '../types'
 
 const COOKIE_NAME = '_docs-events'
 
@@ -18,7 +20,6 @@ let scrollDirection = 1
 let scrollFlipCount = 0
 let maxScrollY = 0
 let previousPath: string | undefined
-
 let hoveredUrls = new Set()
 
 function resetPageParams() {
@@ -37,7 +38,7 @@ function resetPageParams() {
 function uuidv4(): string {
   try {
     return crypto.randomUUID()
-  } catch (err) {
+  } catch {
     // https://stackoverflow.com/a/2117523
     return (<any>[1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: number) =>
       (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16),
@@ -54,73 +55,6 @@ export function getUserEventsId() {
   return cookieValue
 }
 
-export enum EventType {
-  page = 'page',
-  exit = 'exit',
-  link = 'link',
-  hover = 'hover',
-  search = 'search',
-  searchResult = 'searchResult',
-  survey = 'survey',
-  experiment = 'experiment',
-  preference = 'preference',
-  clipboard = 'clipboard',
-  print = 'print',
-}
-
-type SendEventProps = {
-  [EventType.clipboard]: {
-    clipboard_operation: string
-    clipboard_target?: string
-  }
-  [EventType.exit]: {
-    exit_render_duration?: number
-    exit_first_paint?: number
-    exit_dom_interactive?: number
-    exit_dom_complete?: number
-    exit_visit_duration?: number
-    exit_scroll_length?: number
-    exit_scroll_flip?: number
-  }
-  [EventType.experiment]: {
-    experiment_name: string
-    experiment_variation: string
-    experiment_success?: boolean
-  }
-  [EventType.hover]: {
-    hover_url: string
-    hover_samesite?: boolean
-  }
-  [EventType.link]: {
-    link_url: string
-    link_samesite?: boolean
-    link_container?: string
-  }
-  [EventType.page]: {}
-  [EventType.preference]: {
-    preference_name: string
-    preference_value: string
-  }
-  [EventType.print]: {}
-  [EventType.search]: {
-    search_query: string
-    search_context?: string
-  }
-  [EventType.searchResult]: {
-    search_result_query: string
-    search_result_index: number
-    search_result_total: number
-    search_result_rank: number
-    search_result_url: string
-  }
-  [EventType.survey]: {
-    survey_token?: string // Honeypot, doesn't exist in schema
-    survey_vote: boolean
-    survey_comment?: string
-    survey_email?: string
-  }
-}
-
 function getMetaContent(name: string) {
   const metaTag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement
   return metaTag?.content
@@ -133,7 +67,7 @@ export function sendEvent<T extends EventType>({
 }: {
   type: T
   version?: string
-} & SendEventProps[T]) {
+} & EventPropsByType[T]) {
   const body = {
     type,
 
@@ -146,11 +80,12 @@ export function sendEvent<T extends EventType>({
       page_event_id: pageEventId,
 
       // Content information
-      path: location.pathname,
-      hostname: location.hostname,
       referrer: getReferrer(document.referrer),
-      search: location.search,
-      href: location.href,
+      href: location.href, // full URL
+      hostname: location.hostname, // origin without protocol or port
+      path: location.pathname, // path without search or host
+      search: location.search, // also known as query string
+      hash: location.hash, // also known as anchor
       path_language: getMetaContent('path-language'),
       path_version: getMetaContent('path-version'),
       path_product: getMetaContent('path-product'),
@@ -158,6 +93,7 @@ export function sendEvent<T extends EventType>({
       page_document_type: getMetaContent('page-document-type'),
       page_type: getMetaContent('page-type'),
       status: Number(getMetaContent('status') || 0),
+      is_logged_in: isLoggedIn(),
 
       // Device information
       // os, os_version, browser, browser_version:
@@ -202,7 +138,7 @@ function getReferrer(documentReferrer: string) {
     if (!referrerUrl.pathname || referrerUrl.pathname === '/') {
       return referrerUrl.origin + previousPath
     }
-  } catch (e) {}
+  } catch {}
   return documentReferrer
 }
 
@@ -375,7 +311,22 @@ function initLinkEvent() {
       type: EventType.link,
       link_url: link.href,
       link_samesite: sameSite,
+      link_samepage: sameSite && link.pathname === location.pathname,
       link_container: container?.dataset.container,
+    })
+  })
+
+  // Add tracking for scroll to top button
+  document.documentElement.addEventListener('click', (evt) => {
+    const target = evt.target as HTMLElement
+    if (!target.closest('.ghd-scroll-to-top')) return
+    const url = window.location.href.split('#')[0] // Remove hash
+    sendEvent({
+      type: EventType.link,
+      link_url: `${url}#scroll-to-top`,
+      link_samesite: true,
+      link_samepage: true,
+      link_container: 'static',
     })
   })
 }
