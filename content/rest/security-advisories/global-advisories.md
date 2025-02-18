@@ -1,5 +1,6 @@
 ---
-title: Global security advisories
+title: REST API endpoints for global security advisories
+shortTitle: Global security advisories
 intro: Use the REST API to view global security advisories.
 versions: # DO NOT MANUALLY EDIT. CHANGES WILL BE OVERWRITTEN BY A 🤖
   fpt: '*'
@@ -13,11 +14,8 @@ allowTitleToDifferFromFilename: true
 
 {% ifversion ghes %}
 
-{% note %}
-
-**Note:** To use these endpoints, an administrator must enable {% data variables.product.prodname_github_connect %} for {% data variables.location.product_location %}. For more information, see "[AUTOTITLE](/code-security/security-advisories/global-security-advisories/browsing-security-advisories-in-the-github-advisory-database#accessing-the-local-advisory-database-on-your-github-enterprise-server-instance)."
-
-{% endnote %}
+> [!NOTE]
+> To use these endpoints, an administrator must enable {% data variables.product.prodname_github_connect %} for {% data variables.location.product_location %}. For more information, see [AUTOTITLE](/code-security/security-advisories/global-security-advisories/browsing-security-advisories-in-the-github-advisory-database#accessing-the-local-advisory-database-on-your-github-enterprise-server-instance).
 
 {% endif %}
 

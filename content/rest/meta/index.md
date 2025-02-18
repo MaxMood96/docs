@@ -4,11 +4,10 @@ shortTitle: Meta
 allowTitleToDifferFromFilename: true
 intro: >-
   Use the REST API to get meta information about {% data
-  variables.product.product_name %}, including the IP addresses of {% data
-  variables.product.product_name %} services.
+  variables.product.github %}, including the IP addresses of {% data
+  variables.product.github %} services.
 versions:
   fpt: '*'
-  ghae: '*'
   ghec: '*'
   ghes: '*'
 topics:

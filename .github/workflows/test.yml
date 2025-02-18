@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Setting this will activate the jest tests that depend on actually
+  # Setting this will activate the vitest tests that depend on actually
   # sending real search queries to Elasticsearch
   ELASTICSEARCH_URL: http://localhost:9200/
 
@@ -45,6 +45,7 @@ jobs:
           - automated-pipelines
           # - bookmarklets
           - changelogs
+          # - code-scanning
           # - codeql-cli
           - color-schemes
           - content-linter
@@ -65,15 +66,18 @@ jobs:
           - observability
           # - open-source
           - pageinfo
+          - pagelist
           # - pages
           - products
           - redirects
           - release-notes
           - rest
           - search
+          - secret-scanning
           - shielding
           # - tests
           # - tools
+          - tracking
           - versions
           - webhooks
           - workflows
@@ -89,7 +93,7 @@ jobs:
       # Each of these ifs needs to be repeated at each step to make sure the required check still runs
       # Even if if doesn't do anything
       - name: Check out repo
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - uses: ./.github/actions/setup-elasticsearch
         if: ${{ matrix.name == 'search' || matrix.name == 'languages' }}

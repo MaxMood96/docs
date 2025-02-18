@@ -2,7 +2,7 @@
 title: Endpoints available for GitHub App installation access tokens
 shortTitle: Endpoints for GitHub App installation tokens
 intro: Your GitHub App can make requests to the following REST endpoints with an installation access token.
-permissions: 'You can use an installation access token to access these endpoints using your {% data variables.product.prodname_github_app %}. For more information, see "[AUTOTITLE](/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation)."'
+permissions: 'You can use an installation access token to access these endpoints using your {% data variables.product.prodname_github_app %}. For more information, see [AUTOTITLE](/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation).'
 redirect_from:
   - /v3/apps/available-endpoints
   - /rest/reference/endpoints-available-for-github-apps
@@ -11,7 +11,6 @@ redirect_from:
 versions:
   fpt: '*'
   ghes: '*'
-  ghae: '*'
   ghec: '*'
 topics:
   - API

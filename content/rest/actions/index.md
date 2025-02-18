@@ -11,13 +11,13 @@ redirect_from:
 versions:
   fpt: '*'
   ghes: '*'
-  ghae: '*'
   ghec: '*'
 topics:
   - API
 children:
   - /artifacts
   - /cache
+  - /hosted-runners
   - /oidc
   - /permissions
   - /secrets

@@ -4,6 +4,7 @@ intro: 'When analyzing your code with {% data variables.product.prodname_code_sc
 redirect_from:
   - /code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/troubleshooting-your-default-setup-for-codeql
   - /code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/troubleshooting-the-codeql-workflow
+  - /code-security/code-scanning/troubleshooting-code-scanning/results-differ-between-platforms
 versions:
   fpt: '*'
   ghes: '*'
@@ -18,6 +19,7 @@ children:
   - /alerts-in-generated-code
   - /analysis-takes-too-long
   - /automatic-build-failed
+  - /c-sharp-compiler-unexpectedly-failing
   - /cannot-enable-codeql-in-a-private-repository
   - /default-setup-fails-with-a-language
   - /enabling-default-setup-takes-too-long
@@ -29,10 +31,10 @@ children:
   - /out-of-disk-or-memory
   - /resource-not-accessible
   - /results-different-than-expected
-  - /results-differ-between-platforms
   - /server-error
   - /some-languages-not-analyzed
   - /two-codeql-workflows
   - /unclear-what-triggered-a-workflow
   - /unnecessary-step-found
+  - /kotlin-detected-in-no-build
 ---

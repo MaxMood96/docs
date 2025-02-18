@@ -15,6 +15,8 @@ contact_privacy: >-
 
 contact_enterprise_sales: "[GitHub's Sales team](https://github.com/enterprise/contact)"
 
+contact_sales_data_residency: "[GitHub's Sales team](https://github.com/enterprise/contact/data-residency)"
+
 contact_feedback_actions: '[GitHub Community discussions for GitHub Actions](https://github.com/orgs/community/discussions/categories/actions-and-packages)'
 
 # The team that provides Standard Support
@@ -26,13 +28,9 @@ github_support: 'GitHub Support'
 # The team that provides Premium Support
 premium_support: 'GitHub Premium Support'
 
-# Enterprise Support portal (previously the Zendesk portal at enterprise.githubsupport.com)
+# Enterprise Support portal
 enterprise_portal: 'GitHub Support portal'
 contact_enterprise_portal: '[GitHub Support portal](https://support.github.com)'
-
-# Azure support (GitHub AE) portal
-ae_azure_portal: 'Azure Support portal'
-contact_ae_portal: '[Azure Support portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)'
 
 # GitHub Support portal (for dotcom)
 support_portal: 'GitHub Support portal'
@@ -44,3 +42,4 @@ contact_landing_page_portal: '[GitHub Support portal](https://support.github.com
 
 # GitHub Community discussions
 community_support_forum: '[GitHub Community discussions](https://github.com/orgs/community/discussions)'
+community_feedback_discussions: 'GitHub Community discussions'

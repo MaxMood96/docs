@@ -19,7 +19,6 @@ redirect_from:
 versions:
   fpt: '*'
   ghes: '*'
-  ghae: '*'
   ghec: '*'
 layout: product-landing
 introLinks:
@@ -54,6 +53,7 @@ children:
   - /onboarding
   - /using-github
   - /learning-about-github
+  - /learning-to-code
   - /accessibility
   - /writing-on-github
   - /exploring-projects-on-github

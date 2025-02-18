@@ -3,11 +3,9 @@ title: REST API endpoints for emojis
 shortTitle: Emojis
 allowTitleToDifferFromFilename: true
 intro: >-
-  Use the REST API to list and view all the available emojis to use on {% data
-  variables.product.product_name %}.
+  Use the REST API to list and view all the available emojis to use on {% data variables.product.github %}.
 versions:
   fpt: '*'
-  ghae: '*'
   ghec: '*'
   ghes: '*'
 topics:
